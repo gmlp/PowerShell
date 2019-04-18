@@ -6,19 +6,16 @@ git:
 
 os: linux
 dist: trusty
+dotnet: 2.1
 
-addons:
-  apt:
-    sources:
-    - sourceline: 'deb [arch=amd64] https://packages.microsoft.com/ubuntu/14.04/prod trusty main'
-      key_url: 'https://packages.microsoft.com/keys/microsoft.asc'
-    packages:
-      - powershell
+install:
+  - curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+  - curl https://packages.microsoft.com/config/ubuntu/14.04/prod.list | sudo tee /etc/apt/sources.list.d/microsoft.list
+  - sudo apt-get update
+  - sudo apt-get install -y powershell=6.0.2-1.ubuntu.14.04
 
-before_install:
+script:
   - pwsh -File "${env:TRAVIS_BUILD_DIR}/build-module.ps1"
-
-script: ./build-module.ps1
 
 matrix:
   fast_finish: true
