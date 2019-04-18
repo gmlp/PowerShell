@@ -15,7 +15,7 @@ install:
   - sudo apt-get install -y powershell
 
 script:
-  - pwsh -File "${env:TRAVIS_BUILD_DIR}/build-module.ps1"
+  - pwsh -File build-module.ps1"
 
 matrix:
   fast_finish: true
