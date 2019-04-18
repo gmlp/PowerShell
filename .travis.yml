@@ -4,7 +4,16 @@ language: generic
 git:
   depth: 1
 
-dotnet: 2.1.300
+os: linux
+dist: trusty
+
+addons:
+  apt:
+    sources:
+    - sourceline: 'deb [arch=amd64] https://packages.microsoft.com/ubuntu/14.04/prod trusty main'
+    key_url: 'https://packages.microsoft.com/keys/microsoft.asc'
+    packages:
+      - powershell
 
 before_install:
   - pwsh -f "${env:TRAVIS_BUILD_DIR}/build-module.ps1"
@@ -13,17 +22,6 @@ script: ./build-module.ps1
 
 matrix:
   fast_finish: true
-  include:
-    - os: linux
-      dist: trusty
-      sudo: required
-       addons:
-        apt:
-          sources:
-            - sourceline: "deb [arch=amd64] https://packages.microsoft.com/ubuntu/14.04/prod trusty main"
-              key_url: "https://packages.microsoft.com/keys/microsoft.asc"
-          packages:
-            - powershell
 
 # travis-ci will quit using the cache if an enviroment variable changes.
 # CACHE_VERSION is not used for anything other than invalidating the cache.
