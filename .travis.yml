@@ -8,6 +8,9 @@ git:
 
 dotnet: 2.1.300
 
+before_install:
+  - chmod +x build-module.ps1
+
 script: ./build-module.ps1
 
 matrix:
