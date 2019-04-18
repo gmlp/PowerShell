@@ -16,7 +16,7 @@ addons:
       - powershell
 
 before_install:
-  - pwsh -f "${env:TRAVIS_BUILD_DIR}/build-module.ps1"
+  - pwsh -File "${env:TRAVIS_BUILD_DIR}/build-module.ps1"
 
 script: ./build-module.ps1
 
